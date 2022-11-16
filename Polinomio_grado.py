@@ -1,12 +1,14 @@
 def poli(t,s):
+    fig = plt.figure(figsize = (10,6), dpi = 175)
     grado = int(input("¿Cuántos polinomios de usaran para el ajuste?"))
     for i in range(grado):
         tendencia = np.poly1d(np.polyfit(t,s,(i+1)));
+        plt.plot(t,tendencia(t), "--", linewidth = 2)
     exactitud = r2_score(s, tendencia(t))*100
     print("El polinomio de grado {} tiene una exactitud de {}%".format(grado,exactitud))
-    fig = plt.figure(figsize = (10,6), dpi = 175)
-    plt.plot(t,s, c = "orange")
-    plt.plot(t,tendencia(t), "--", linewidth = 3, c = "salmon", label = "Tendencia")
+    
+    plt.plot(t,s, c = "k", label = "Datos")
+
     titulo = input("Título de la gráfica: ")
     plt.title("{}".format(titulo), fontsize = 40)
     xlab = input("Eje x: ")
